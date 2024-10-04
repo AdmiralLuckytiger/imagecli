@@ -28,5 +28,24 @@ pub fn get_stats(src_folder: PathBuf) -> Result<(usize, f64), ImagixError>{
         .iter()
         .map(move |f| f.metadata().unwrap().len())
         .sum::<u64>();
-    Ok((image_files.len(), (size / 1000000) as f64))
+    Ok((image_files.len(), (size / 1000) as f64))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_stats() {
+        let path = PathBuf::from("/tmp/images");
+
+        match get_stats(path) {
+            Ok((size,num)) => {
+                println!("{} images => {}KB", size, num);
+            }
+            Err(_) => {
+                panic!("Error in test!!!");
+            }
+        }
+    }
 }
