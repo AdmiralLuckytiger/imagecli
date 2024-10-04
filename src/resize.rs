@@ -4,18 +4,20 @@ use image::ImageFormat;
 use crate::error::ImagixError;
 use crate::stats::Elapsed;
 
+/// Data structure that specifies the scope of the process
 pub enum Mode {
     Single,
     All,
 }
 
+/// Data structure that specifies the output size of the given images
 pub enum SizeOption {
     Small, // size = 200px
     Medium, // size = 400px
     Large, // size = 800px
 }
 
-// Public interface for interacting with the library
+/// Public interface for interacting with the library
 pub fn process_resize_request(size: SizeOption, mode: Mode, src_folder: &mut PathBuf) -> Result<(), ImagixError> {
     match mode {
         Mode::Single => {
@@ -27,7 +29,7 @@ pub fn process_resize_request(size: SizeOption, mode: Mode, src_folder: &mut Pat
     }
 }
 
-// This functions wrap the functionality of resize image for a specified image
+/// This functions wrap the functionality of resize image for a specified image
 fn resize_single(path: &mut PathBuf, size: SizeOption) -> Result<(), ImagixError> {
     let size: u32 = match size {
         SizeOption::Large => {
@@ -44,7 +46,7 @@ fn resize_single(path: &mut PathBuf, size: SizeOption) -> Result<(), ImagixError
     resize_image(size, path)
 }
 
-// This function wrap the functionality of resize image for a all folder
+/// This function wrap the functionality of resize image for a all folder
 fn resize_all(path: &mut PathBuf, size: SizeOption) -> Result<(), ImagixError>{
     let size: u32 = match size {
         SizeOption::Large => {
@@ -69,7 +71,7 @@ fn resize_all(path: &mut PathBuf, size: SizeOption) -> Result<(), ImagixError>{
     }
 }
 
-// This functions generetes the resize image and the necesary folder
+/// This functions generetes the resize image and the necesary folder
 fn resize_image(size: u32, src_folder: &mut PathBuf) -> Result<(), ImagixError>{
     // Cosntruct destination filename with .png extension
     let new_file_name = src_folder

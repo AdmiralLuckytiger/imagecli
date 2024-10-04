@@ -1,5 +1,7 @@
 use std::{convert::From, io, fmt};
 
+
+/// Data strcture for handling the multiple kinderrors in the library
 #[derive(Debug)]
 pub enum ImagixError {
     FileIOError(String),

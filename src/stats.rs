@@ -4,6 +4,7 @@ use crate::{error::ImagixError, resize::get_images_files};
 
 use std::{fmt, convert::From, time};
 
+/// Data structure that stores the duration of the resize process.
 pub struct Elapsed {
     duration: u32,
 }
@@ -22,6 +23,7 @@ impl From<&time::Instant> for Elapsed {
     }
 }
 
+/// Function that analyze the number of images and the total size of the given path.
 pub fn get_stats(src_folder: PathBuf) -> Result<(usize, f64), ImagixError>{
     let image_files = get_images_files(src_folder.to_path_buf())?;
     let size = image_files
@@ -41,7 +43,7 @@ mod tests {
 
         match get_stats(path) {
             Ok((size,num)) => {
-                println!("{} images => {}KB", size, num);
+                println!("{} images t => {}KB", size, num);
             }
             Err(_) => {
                 panic!("Error in test!!!");
