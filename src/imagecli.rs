@@ -1,7 +1,5 @@
+mod imagix;
+
 fn main() {
 
-}
-
-pub fn get_stats() {
-    todo!()
 }

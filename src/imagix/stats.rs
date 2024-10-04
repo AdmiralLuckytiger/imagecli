@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use crate::{error::ImagixError, resize::get_images_files};
+use super::{error::ImagixError, resize::get_images_files};
 
 use std::{fmt, convert::From, time};
 

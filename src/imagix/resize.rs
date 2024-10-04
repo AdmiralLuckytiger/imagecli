@@ -1,8 +1,7 @@
 use std::{fs, io, path::PathBuf, time::Instant};
 use image::ImageFormat;
 
-use crate::error::ImagixError;
-use crate::stats::Elapsed;
+use super::{error::ImagixError, stats::Elapsed};
 
 /// Data structure that specifies the scope of the process
 pub enum Mode {
