@@ -125,7 +125,7 @@ fn resize_image(size: u32, src_folder: &mut PathBuf) -> Result<(), ImagixError>{
     dest_folder.push("tmp/tmp.png");
     dest_folder.set_file_name(new_file_name?.as_str());
 
-    dbg!(&src_folder);
+    //dbg!(&src_folder);
     // Resize image and take some measuraments
     let timer = Instant::now();
     let img = image::open(&src_folder)?;
