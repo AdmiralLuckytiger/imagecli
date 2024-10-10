@@ -1,20 +1,54 @@
-use std::{fs, io, path::PathBuf, time::Instant};
+use std::{fs, io, path::PathBuf, str::FromStr, time::Instant};
 use image::ImageFormat;
 
 use super::{error::ImagixError, stats::Elapsed};
 
 /// Data structure that specifies the scope of the process
+#[derive(Debug)]
 pub enum Mode {
     Single,
     All,
 }
 
+impl FromStr for Mode {
+    type Err = ImagixError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "single" | "Single" => return Ok(Mode::Single),
+            "all" | "All"       => return Ok(Mode::All),
+            _ => return Err(ImagixError::FormatError("Invalid input: %s".to_string()))
+        }
+    }   
+}
+
 /// Data structure that specifies the output size of the given images
+#[derive(Debug)]
 pub enum SizeOption {
     Small, // size = 200px
     Medium, // size = 400px
     Large, // size = 800px
 }
+
+impl FromStr for SizeOption {
+    type Err = ImagixError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "small" | "Small" => {
+                return Ok(SizeOption::Small);
+            },
+            "medium" | "Medium" => {
+                return Ok(SizeOption::Medium);
+            },
+            "large" | "Large" => {
+                return Ok(SizeOption::Large);
+            },
+            _ => return Err(ImagixError::FormatError("Invalid input: %s".to_string()))
+        }
+    }   
+}
+
 
 /// Public interface for interacting with the library
 pub fn process_resize_request(size: SizeOption, mode: Mode, src_folder: &mut PathBuf) -> Result<(), ImagixError> {
