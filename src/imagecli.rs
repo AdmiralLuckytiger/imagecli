@@ -2,7 +2,7 @@ mod imagix;
 
 use std::path::PathBuf;
 
-use imagix::{error::{self, ImagixError}, resize::{self, process_resize_request}, stats::{self, get_stats}};
+use imagix::{error::ImagixError, resize::{self, process_resize_request}, stats::get_stats};
 
 use structopt::StructOpt;
 
@@ -58,8 +58,6 @@ fn main() {
                         ImagixError::UserInputError(e) => {
                             eprintln!("{}", e);
                         },
-
-                        _ => eprintln!("Error in processing")
                     }
                 }
             }
@@ -83,8 +81,6 @@ fn main() {
                         ImagixError::UserInputError(e) => {
                             eprintln!("{}", e);
                         },
-
-                        _ => eprintln!("Error in processing")
                     }
                 }
             }
