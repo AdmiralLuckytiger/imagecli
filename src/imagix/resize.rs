@@ -17,7 +17,7 @@ impl FromStr for Mode {
         match s {
             "single" | "Single" => return Ok(Mode::Single),
             "all" | "All"       => return Ok(Mode::All),
-            _ => return Err(ImagixError::FormatError("Invalid input: %s".to_string()))
+            _ => return Err(ImagixError::FormatError("Invalid input".to_string()))
         }
     }   
 }
@@ -44,7 +44,7 @@ impl FromStr for SizeOption {
             "large" | "Large" => {
                 return Ok(SizeOption::Large);
             },
-            _ => return Err(ImagixError::FormatError("Invalid input: %s".to_string()))
+            _ => return Err(ImagixError::FormatError("Invalid input".to_string()))
         }
     }   
 }
